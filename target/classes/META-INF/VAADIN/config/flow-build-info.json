@@ -1,0 +1,18 @@
+{
+  "productionMode": false,
+  "eagerServerLoad": false,
+  "npmFolder": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5",
+  "node.version": "v20.15.0",
+  "node.download.root": "https://nodejs.org/dist/",
+  "frontendFolder": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5\\src\\main\\frontend",
+  "connect.javaSourceFolder": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5\\src\\main\\java",
+  "javaResourceFolder": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5\\src\\main\\resources",
+  "connect.applicationProperties": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5\\src\\main\\resources\\application.properties",
+  "connect.openApiFile": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5\\target\\generated-resources\\openapi.json",
+  "project.frontend.generated": "D:\\Universidad\\Ciclo5\\DAW\\Proyecto\\test\\AVANCE5\\src\\main\\frontend\\generated",
+  "pnpm.enable": false,
+  "bun.enable": false,
+  "require.home.node": false,
+  "build.folder": "target",
+  "react.enable": true
+}
