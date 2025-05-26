@@ -1,0 +1,41 @@
+# Java class files
+*.class
+
+# Maven target directory
+/target/
+
+# Maven logs
+log/
+*.log
+
+# Eclipse files
+*.prefs
+*.classpath
+*.project
+
+# IntelliJ IDEA files
+*.iml
+.idea/
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Application properties with sensitive info
+/src/main/resources/application.properties
+/src/main/resources/application-production.properties
+
+# Session or temporary files
+PACLA.session.sql
+
+# Node dependencies (if you use Node for frontend)
+/node_modules/
+
+# Vaadin generated frontend files (optional, if you want to ignore)
+/src/main/frontend/generated/
+
+# Environment variables
+.env
