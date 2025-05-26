@@ -19,6 +19,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Header;
@@ -59,6 +60,11 @@ public class MainLayout extends AppLayout {
     
 private Footer createAuthFooter() {
     Footer footer = new Footer();
+    footer.getStyle()
+            .set("display", "flex")
+            .set("flexDirection", "column")
+            .set("alignItems", "flex-start")
+            .set("padding", "1rem");
 
     var authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -67,30 +73,48 @@ private Footer createAuthFooter() {
         !(authentication instanceof AnonymousAuthenticationToken)) {
 
         String username;
+        String roleName = "Sin rol";
+
         if (authentication instanceof OAuth2AuthenticationToken oauthToken) {
-            OAuth2User user = oauthToken.getPrincipal();
+            var user = oauthToken.getPrincipal();
             username = (String) user.getAttributes().get("email");
         } else {
             username = authentication.getName();
         }
 
-        // Obtener rol principal
-        String mainRole = getMainRole();
+        for (GrantedAuthority authority : authentication.getAuthorities()) {
+            if (authority.getAuthority().startsWith("ROLE_")) {
+                roleName = authority.getAuthority().replace("ROLE_", "");
+                break;
+            }
+        }
 
-        // Mostrar correo y rol
-        Span userEmail = new Span("Correo: " + username);
-        Span userRole = new Span("Rol: " + mainRole);
+        Span rol = new Span("Rol: " + roleName);
+        rol.getStyle().set("font-weight", "bold").set("font-size", "16px");
 
-        userEmail.getStyle().set("display", "block").set("margin-bottom", "0.2rem");
-        userRole.getStyle().set("display", "block").set("margin-bottom", "0.5rem");
+        Span user = new Span("Usuario: " + username);
+        user.getStyle().set("font-weight", "bold").set("font-size", "16px");
 
-        // Botón de logout
-        Button logout = new Button("Cerrar sesión", e -> {
-            Notification.show("Cerrando sesión...", 3000, Notification.Position.MIDDLE);
+        Button logout = new Button("Cerrar sesión");
+        logout.getStyle().set("margin-top", "0.5rem");
+
+        Dialog confirmDialog = new Dialog();
+        confirmDialog.setHeaderTitle("¿Confirmar cierre de sesión?");
+        confirmDialog.add("¿Estás seguro de que deseas cerrar sesión?");
+
+        Button confirm = new Button("Sí, cerrar sesión", e -> {
+            confirmDialog.close();
             UI.getCurrent().getPage().setLocation("/logout");
         });
+        confirm.getStyle().set("background-color", "red").set("color", "white");
 
-        footer.add(userEmail, userRole, logout);
+        Button cancel = new Button("Cancelar", e -> confirmDialog.close());
+        confirmDialog.getFooter().add(cancel, confirm);
+
+        logout.addClickListener(e -> confirmDialog.open());
+
+        footer.add(rol, user, logout, confirmDialog);
+
     } else {
         Button login = new Button("Login", e -> {
             UI.getCurrent().getPage().setLocation("/oauth2/authorization/okta");
@@ -101,17 +125,6 @@ private Footer createAuthFooter() {
     return footer;
 }
 
-private String getMainRole() {
-    if (hasAuthority("ROLE_ADMIN")) {
-        return "ADMIN";
-    } else if (hasAuthority("ROLE_PROFESOR")) {
-        return "PROFESOR";
-    } else if (hasAuthority("ROLE_ESTUDIANTE")) {
-        return "ESTUDIANTE";
-    } else {
-        return "Desconocido";
-    }
-}
 
 
 
