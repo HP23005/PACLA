@@ -74,18 +74,17 @@ private Footer createAuthFooter() {
             username = authentication.getName();
         }
 
-        // Obtener roles como cadena
-        String roles = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .reduce((a, b) -> a + ", " + b)
-                .orElse("Sin rol");
+        // Obtener rol principal
+        String mainRole = getMainRole();
 
-        // Elementos visuales
+        // Mostrar correo y rol
         Span userEmail = new Span("Correo: " + username);
-        Span userRole = new Span("Rol: " + roles);
-        userEmail.getStyle().set("display", "block");
-        userRole.getStyle().set("display", "block");
+        Span userRole = new Span("Rol: " + mainRole);
 
+        userEmail.getStyle().set("display", "block").set("margin-bottom", "0.2rem");
+        userRole.getStyle().set("display", "block").set("margin-bottom", "0.5rem");
+
+        // Botón de logout
         Button logout = new Button("Cerrar sesión", e -> {
             Notification.show("Cerrando sesión...", 3000, Notification.Position.MIDDLE);
             UI.getCurrent().getPage().setLocation("/logout");
@@ -100,6 +99,18 @@ private Footer createAuthFooter() {
     }
 
     return footer;
+}
+
+private String getMainRole() {
+    if (hasAuthority("ROLE_ADMIN")) {
+        return "ADMIN";
+    } else if (hasAuthority("ROLE_PROFESOR")) {
+        return "PROFESOR";
+    } else if (hasAuthority("ROLE_ESTUDIANTE")) {
+        return "ESTUDIANTE";
+    } else {
+        return "Desconocido";
+    }
 }
 
 
