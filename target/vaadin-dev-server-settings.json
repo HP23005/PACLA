@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "C:/Users/ivan/Music/pacla/src/main/frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "C:/Users/ivan/Music/pacla/src/main/frontend/generated/jar-resources",
+  "staticOutput": "C:/Users/ivan/Music/pacla/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "C:\\Users\\ivan\\Music\\pacla\\target\\classes\\META-INF\\VAADIN\\config",
+  "frontendBundleOutput": "C:\\Users\\ivan\\Music\\pacla\\target\\classes\\META-INF\\VAADIN\\webapp",
+  "devBundleOutput": "C:/Users/ivan/Music/pacla/target/dev-bundle/webapp",
+  "devBundleStatsOutput": "C:/Users/ivan/Music/pacla/target/dev-bundle/config",
+  "jarResourcesFolder": "C:/Users/ivan/Music/pacla/src/main/frontend/generated/jar-resources",
+  "themeName": "my-app",
+  "clientServiceWorkerSource": "C:\\Users\\ivan\\Music\\pacla\\target\\sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
