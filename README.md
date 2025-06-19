@@ -1,5 +1,6 @@
 # PACLA
 
+### 🔸 Comandos para levantar el proyecto en Docker
 ```bash
 mvn clean install
 mvn clean install  -Pproduction
